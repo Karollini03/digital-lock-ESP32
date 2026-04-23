@@ -20,12 +20,13 @@
 
 body {
   background: var(--bg);
-  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-display);
   overflow: hidden;
+  padding: 1rem;
 }
 
 body::before {
@@ -51,6 +52,7 @@ body::before {
   gap: 1.25rem;
   position: relative;
   box-shadow: 0 0 60px rgba(37, 99, 235, 0.1), inset 0 1px 0 rgba(255,255,255,0.05);
+  transform: translateY(-0.75vh);
 }
 
 .card::before {

@@ -1,8 +1,9 @@
 const SENHA = '1234';
 let entrada = '';
+let cleanupTimer = null;
 
 function updateDisplay(state) {
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 4; i++) {
     const d = document.getElementById('d' + i);
     d.innerHTML = '';
     d.className = 'digit';
@@ -23,6 +24,19 @@ function resetUI() {
   sub.textContent = 'Digite sua senha';
   icon.className = 'lock-icon';
   svg.setAttribute('stroke', '#2563eb');
+}
+
+function limparAposDelay(delay) {
+  if (cleanupTimer) {
+    clearTimeout(cleanupTimer);
+  }
+
+  cleanupTimer = setTimeout(() => {
+    entrada = '';
+    resetUI();
+    updateDisplay('normal');
+    cleanupTimer = null;
+  }, delay);
 }
 
 function press(n) {
@@ -51,23 +65,15 @@ function confirmar() {
     icon.className = 'lock-icon success';
     svg.setAttribute('stroke', '#22c55e');
     updateDisplay('success');
-    setTimeout(() => {
-      entrada = '';
-      resetUI();
-      updateDisplay('normal');
-    }, 2000);
   } else {
     sub.className = 'subtitle error';
     sub.textContent = 'Senha incorreta';
     icon.className = 'lock-icon error';
     svg.setAttribute('stroke', '#ef4444');
     updateDisplay('error');
-    setTimeout(() => {
-      entrada = '';
-      resetUI();
-      updateDisplay('normal');
-    }, 1500);
   }
+
+  limparAposDelay(2000);
 }
 
 function autofill() {
