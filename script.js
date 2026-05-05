@@ -3,7 +3,7 @@
 // =============================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
- 
+
 const firebaseConfig = {
   apiKey: "AIzaSyC3hFDdE-e1kQE6sKBkOeeH12Je7ovA6-4",
   authDomain: "projeto-sisop.firebaseapp.com",
@@ -14,13 +14,13 @@ const firebaseConfig = {
   appId: "1:452794231364:web:ca353ab44d25d3e1e8aa11",
   measurementId: "G-RXK6YPS293"
 };
- 
-// =============================================
-// LÓGICA DA FECHADURA
-// =============================================
+
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
+// =============================================
+// LÓGICA DA FECHADURA
+// =============================================
 const SENHA = '1234';
 let entrada = '';
 let cleanupTimer = null;
@@ -49,11 +49,25 @@ function resetUI() {
   svg.setAttribute('stroke', '#2563eb');
 }
 
-function limparAposDelay(delay) {
-  if (cleanupTimer) {
-    clearTimeout(cleanupTimer);
-  }
+function salvarLog(status) {
+  const agora = new Date();
+  const horario = agora.toLocaleString('pt-BR');
 
+  // Salva o comando atual pra ESP32 ler
+  set(ref(db, 'fechadura/comando'), {
+    status: status,
+    horario: horario
+  });
+
+  // Salva no histórico de logs
+  push(ref(db, 'fechadura/logs'), {
+    status: status,
+    horario: horario
+  });
+}
+
+function limparAposDelay(delay) {
+  if (cleanupTimer) clearTimeout(cleanupTimer);
   cleanupTimer = setTimeout(() => {
     entrada = '';
     resetUI();
@@ -88,12 +102,14 @@ function confirmar() {
     icon.className = 'lock-icon success';
     svg.setAttribute('stroke', '#22c55e');
     updateDisplay('success');
+    salvarLog('sucesso'); // envia pro Firebase
   } else {
     sub.className = 'subtitle error';
     sub.textContent = 'Senha incorreta';
     icon.className = 'lock-icon error';
     svg.setAttribute('stroke', '#ef4444');
     updateDisplay('error');
+    salvarLog('falha'); // envia pro Firebase
   }
 
   limparAposDelay(2000);
@@ -104,6 +120,12 @@ function autofill() {
   resetUI();
   updateDisplay('normal');
 }
+
+// Expõe as funções pro HTML (necessário com type="module")
+window.press = press;
+window.del = del;
+window.confirmar = confirmar;
+window.autofill = autofill;
 
 // Suporte ao teclado físico
 document.addEventListener('keydown', (e) => {
