@@ -1,3 +1,26 @@
+// =============================================
+// CONFIGURAÇÃO DO FIREBASE
+// =============================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+ 
+const firebaseConfig = {
+  apiKey: "AIzaSyC3hFDdE-e1kQE6sKBkOeeH12Je7ovA6-4",
+  authDomain: "projeto-sisop.firebaseapp.com",
+  databaseURL: "https://projeto-sisop-default-rtdb.firebaseio.com",
+  projectId: "projeto-sisop",
+  storageBucket: "projeto-sisop.firebasestorage.app",
+  messagingSenderId: "452794231364",
+  appId: "1:452794231364:web:ca353ab44d25d3e1e8aa11",
+  measurementId: "G-RXK6YPS293"
+};
+ 
+// =============================================
+// LÓGICA DA FECHADURA
+// =============================================
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
 const SENHA = '1234';
 let entrada = '';
 let cleanupTimer = null;
@@ -40,7 +63,7 @@ function limparAposDelay(delay) {
 }
 
 function press(n) {
-  if (entrada.length < 6) {
+  if (entrada.length < 4) {
     entrada += n;
     resetUI();
     updateDisplay('normal');
