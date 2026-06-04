@@ -5,8 +5,8 @@
 // =============================================
 // CONFIGURAÇÕES DO WI-FI
 // =============================================
-#define WIFI_SSID     ""
-#define WIFI_PASSWORD "SUA_SENHA_AQUI"
+#define WIFI_SSID     "karol"
+#define WIFI_PASSWORD "karol0301"
 
 // URL do Firebase pra ler o status
 #define FIREBASE_URL "https://projeto-sisop-default-rtdb.firebaseio.com/fechadura/comando/status.json"
@@ -81,7 +81,7 @@ void loop() {
           delay(200);
           digitalWrite(LED_VERMELHO, HIGH); // volta ligado
         }
-      }b
+      }
     } else {
       Serial.println("Erro HTTP: " + String(httpCode));
     }

@@ -65,13 +65,6 @@ function salvarLog(status) {
     horario: horario
   });
 
-  // Reseta o status após 4 segundos
-  setTimeout(() => {
-  set(ref(db, 'fechadura/comando'), {
-    status: "idle",
-    horario: ""
-  });
-  }, 4000);
 }
 
 function limparAposDelay(delay) {
