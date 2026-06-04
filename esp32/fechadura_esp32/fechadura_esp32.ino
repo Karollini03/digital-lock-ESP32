@@ -5,7 +5,7 @@
 // =============================================
 // CONFIGURAÇÕES DO WI-FI
 // =============================================
-#define WIFI_SSID     "SEU_WIFI_AQUI"
+#define WIFI_SSID     ""
 #define WIFI_PASSWORD "SUA_SENHA_AQUI"
 
 // URL do Firebase pra ler o status
