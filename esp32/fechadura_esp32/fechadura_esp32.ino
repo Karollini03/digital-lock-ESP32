@@ -5,8 +5,8 @@
 // =============================================
 // CONFIGURAÇÕES DO WI-FI
 // =============================================
-#define WIFI_SSID     "REDE20"
-#define WIFI_PASSWORD "20#UERGSNET99"
+#define WIFI_SSID     "SEU_WIFI_AQUI"
+#define WIFI_PASSWORD "SUA_SENHA_AQUI"
 
 // URL do Firebase pra ler o status
 #define FIREBASE_URL "https://projeto-sisop-default-rtdb.firebaseio.com/fechadura/comando/status.json"
