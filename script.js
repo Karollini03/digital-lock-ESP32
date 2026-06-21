@@ -279,16 +279,20 @@ function renderBarChart(svg, labels, sucessoData, falhaData) {
 
     const xSucesso = groupX - gap / 2 - barW;
     const xFalha = groupX + gap / 2;
+    const ySucessoTop = padTop + chartH - sucessoH;
+    const yFalhaTop = padTop + chartH - falhaH;
 
     bars += `
-      <rect x="${xSucesso}" y="${padTop + chartH - sucessoH}" width="${barW}" height="${sucessoH}"
+      <rect x="${xSucesso}" y="${ySucessoTop}" width="${barW}" height="${sucessoH}"
             rx="3" fill="#22c55e" opacity="0.9">
         <title>${sucessoData[i]} sucesso(s)</title>
       </rect>
-      <rect x="${xFalha}" y="${padTop + chartH - falhaH}" width="${barW}" height="${falhaH}"
+      <rect x="${xFalha}" y="${yFalhaTop}" width="${barW}" height="${falhaH}"
             rx="3" fill="#ef4444" opacity="0.9">
         <title>${falhaData[i]} falha(s)</title>
       </rect>
+      ${sucessoData[i] > 0 ? `<text x="${xSucesso + barW / 2}" y="${ySucessoTop - 5}" class="chart-value-label success">${sucessoData[i]}</text>` : ''}
+      ${falhaData[i] > 0 ? `<text x="${xFalha + barW / 2}" y="${yFalhaTop - 5}" class="chart-value-label error">${falhaData[i]}</text>` : ''}
       <text x="${groupX}" y="${H - 6}" class="chart-bar-label">${label}</text>
     `;
   });

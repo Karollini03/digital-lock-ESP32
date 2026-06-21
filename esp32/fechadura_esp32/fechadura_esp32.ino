@@ -6,8 +6,8 @@
 // =============================================
 // CONFIGURAÇÕES - PREENCHA AQUI
 // =============================================
-#define WIFI_SSID     "karol"
-#define WIFI_PASSWORD "karol0301"
+#define WIFI_SSID     "wifi-aqui"
+#define WIFI_PASSWORD "wifi-aqui"
 
 // URL do Firebase pra ler o status
 #define FIREBASE_HOST "projeto-sisop-default-rtdb.firebaseio.com"

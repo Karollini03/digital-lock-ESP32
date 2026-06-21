@@ -511,6 +511,16 @@ body::before {
   text-anchor: end;
 }
 
+.chart-value-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.chart-value-label.success { fill: var(--green); }
+.chart-value-label.error { fill: var(--red); }
+
 .log-list {
   background: var(--surface);
   border: 1px solid var(--border);
