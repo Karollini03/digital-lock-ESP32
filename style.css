@@ -42,6 +42,35 @@ body::before {
 }
 
 /* =========================================
+   MENU TOGGLE (hambúrguer) — só aparece no mobile
+   ========================================= */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 30;
+  box-shadow: 0 0 16px rgba(0,0,0,0.4);
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 15;
+}
+
+/* =========================================
    SIDEBAR
    ========================================= */
 .sidebar {
@@ -555,14 +584,39 @@ body::before {
 /* =========================================
    RESPONSIVE
    ========================================= */
-@media (max-width: 480px) {
-  .sidebar {
-    width: 56px;
+@media (max-width: 680px) {
+  .menu-toggle {
+    display: flex;
   }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 20;
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay.open {
+    display: block;
+  }
+
+  .main {
+    padding-top: 4.5rem;
+  }
+
   .card {
     width: 100%;
     max-width: 320px;
   }
+
   .counters {
     grid-template-columns: 1fr 1fr;
   }

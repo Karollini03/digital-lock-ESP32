@@ -19,6 +19,20 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 // =============================================
+// MENU LATERAL RESPONSIVO (mobile)
+// =============================================
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+window.toggleSidebar = toggleSidebar;
+
+function fecharSidebarMobile() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+// =============================================
 // NAVEGAÇÃO ENTRE TELAS
 // =============================================
 function mostrarView(nome) {
@@ -38,6 +52,8 @@ function mostrarView(nome) {
   if (nome === 'statsPanel') {
     escutarLogs();
   }
+
+  fecharSidebarMobile();
 }
 window.mostrarView = mostrarView;
 
